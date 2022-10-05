@@ -62,9 +62,9 @@ val hooksInstalled = commitMsgHook.exists()
     && prePushHook.exists()
     && prePushHook.readBytes().contentEquals(file("tools/pre-push").readBytes())
 
-if (!hooksInstalled) {
-    exec {
-        commandLine("tools/setup.sh")
-        workingDir = rootProject.projectDir
-    }
-}
+//if (!hooksInstalled) {
+//    exec {
+//        commandLine("tools/setup.sh")
+//        workingDir = rootProject.projectDir
+//    }
+//}
