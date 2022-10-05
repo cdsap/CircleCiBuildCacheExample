@@ -23,6 +23,6 @@ workflows:
     jobs:
       - say-hello
       - second-step
-        require:
-          - say-hello
+          requires:
+            - say-hello
 
