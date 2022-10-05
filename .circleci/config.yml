@@ -25,4 +25,10 @@ workflows:
       - second-step:
           requires:
             - say-hello
+      - third-step:
+            requires:
+                - say-hello
+      - fourth-step:
+            requires:
+                - say-hello
 
