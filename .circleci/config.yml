@@ -10,7 +10,16 @@ jobs:
           name: "Help"
           command: ./gradlew :help
 
+  second-step:
+      docker:
+          - image: cimg/android:2022.09
+      steps:
+          - checkout
+          - run:
+                name: "Help"
+                command: ./gradlew :help
 workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+      - second-step
