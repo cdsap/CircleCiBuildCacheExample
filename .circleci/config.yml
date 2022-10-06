@@ -2,7 +2,7 @@ version: 2.1
 parameters:
   cache-version:
     type: string
-    default: "0.4"
+    default: "0.5"
 
 save_cache_wrapper: &save_cache_wrapper
   save_cache:
@@ -63,7 +63,7 @@ jobs:
       - <<: *restore_cache_assemble
       - run:
           name: "Help"
-          command: ./gradlew :core:model:compileKotlin --info
+          command: ./gradlew :app:assembleDebug --info
       - <<: *save_cache_wrapper
       - <<: *remove_lock_files
       - <<: *save_cache_assemble
