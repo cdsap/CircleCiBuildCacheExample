@@ -2,7 +2,7 @@ version: 2.1
 parameters:
   cache-version:
     type: string
-    default: "0.1"
+    default: "0.2"
 
 save_cache_wrapper: &save_cache_wrapper
   save_cache:
@@ -23,6 +23,13 @@ restore_cache_assemble: &restore_cache_assemble
     restore_cache:
         key: << pipeline.parameters.cache-version >>-assemble-{{ checksum "settings.gradle.kts" }}
 
+remove_lock_files: &remove_lock_files
+    run:
+      name: "Remove lock Files"
+      command: |
+          cd ~/.gradle/caches/modules-2
+          find . -name "*.lock" -delete
+          find . -name "gc.properties" -delete
 
 jobs:
   say-hello:
@@ -47,6 +54,7 @@ jobs:
           name: "Help"
           command: ./gradlew :app:assembleDebug
       - <<: *save_cache_wrapper
+      - <<: *remove_lock_files
       - <<: *save_cache_assemble
 
 workflows:
