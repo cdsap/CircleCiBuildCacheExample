@@ -13,6 +13,17 @@ restore_cache_wrapper: &restore_cache_wrapper
   restore_cache:
     key: << pipeline.parameters.cache-version >>-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
 
+
+save_cache_assemble: &save_cache_assemble
+    save_cache:
+        key: << pipeline.parameters.cache-version >>-assemble-{{ checksum "settings.gradle.kts" }}
+        paths:
+            - ~/.gradle/caches/modules-2/files-2.1
+restore_cache_assemble: &restore_cache_assemble
+    restore_cache:
+        key: << pipeline.parameters.cache-version >>-assemble-{{ checksum "settings.gradle.kts" }}
+
+
 jobs:
   say-hello:
     docker:
@@ -31,10 +42,12 @@ jobs:
     steps:
       - checkout
       - <<: *restore_cache_wrapper
+      - <<: *restore_cache_assemble
       - run:
           name: "Help"
-          command: ./gradlew :help
+          command: ./gradlew :assembleDebug
       - <<: *save_cache_wrapper
+      - <<: *save_cache_assemble
 
 workflows:
   say-hello-workflow:
