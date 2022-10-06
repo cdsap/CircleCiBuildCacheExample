@@ -23,6 +23,25 @@ pluginManagement {
     }
 }
 
+plugins {
+    id("com.gradle.common-custom-user-data-gradle-plugin") version "1.7.2"
+    id("com.gradle.enterprise") version "3.11.1"
+
+}
+
+gradleEnterprise {
+    server = System.getenv("GE_URL")
+    allowUntrustedServer = true
+    buildScan {
+        publishAlways()
+        capture {
+            taskInputFiles = true
+        }
+        uploadInBackground = System.getenv("CI") == null // adjust to your CI provider
+    }
+}
+
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
