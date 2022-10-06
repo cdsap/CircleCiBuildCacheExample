@@ -18,43 +18,22 @@ jobs:
       - image: cimg/android:2022.09
     steps:
       - checkout
-      - *restore_cache_wrapper
+      <<: *restore_cache_wrapper
       - run:
           name: "Help"
           command: ./gradlew :help
-      - *save_cache_wrapper
+      <<: *save_cache_wrapper
 
   second-step:
-      docker:
-          - image: cimg/android:2022.09
-      steps:
-          - checkout
-          - *restore_cache_wrapper
-          - run:
-                name: "Help"
-                command: ./gradlew :help
-          - *save_cache_wrapper
-  third-step:
-      docker:
-          - image: cimg/android:2022.09
-      steps:
-          - checkout
-          - *restore_cache_wrapper
-          - run:
-                name: "Help"
-                command: ./gradlew :help
-          - *save_cache_wrapper
-  fourth-step:
-      docker:
-          - image: cimg/android:2022.09
-      steps:
-          - checkout
-          - *restore_cache_wrapper
-          - run:
-                name: "Help"
-                command: ./gradlew :help
-          - *save_cache_wrapper
-
+    docker:
+      - image: cimg/android:2022.09
+    steps:
+      - checkout
+      <<: *restore_cache_wrapper
+      - run:
+          name: "Help"
+          command: ./gradlew :help
+      <<: *save_cache_wrapper
 
 workflows:
   say-hello-workflow:
@@ -63,10 +42,3 @@ workflows:
       - second-step:
           requires:
             - say-hello
-      - third-step:
-            requires:
-                - say-hello
-      - fourth-step:
-            requires:
-                - say-hello
-
