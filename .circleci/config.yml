@@ -7,12 +7,12 @@ parameters:
 
 save_cache_wrapper: &save_cache_wrapper
   save_cache:
-    key: gradle-wrapper-<< pipeline.parameters.image-tag >>--{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+    key: gradle-wrapper-<< pipeline.parameters.cache-version >>--{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
     paths:
        - ~/.gradle/wrapper/
 restore_cache_wrapper: &restore_cache_wrapper
   restore_cache:
-    key: gradle-wrapper-<< pipeline.parameters.image-tag >>--{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+    key: gradle-wrapper-<< pipeline.parameters.cache-version >>--{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
 
 jobs:
   say-hello:
