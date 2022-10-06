@@ -19,6 +19,8 @@ save_cache_assemble: &save_cache_assemble
         key: << pipeline.parameters.cache-version >>-assemble-{{ checksum "settings.gradle.kts" }}
         paths:
             - ~/.gradle/caches/modules-2/files-2.1
+            - ~/.gradle/caches/modules-2/jars-9
+
 restore_cache_assemble: &restore_cache_assemble
     restore_cache:
         key: << pipeline.parameters.cache-version >>-assemble-{{ checksum "settings.gradle.kts" }}
@@ -32,6 +34,13 @@ remove_lock_files: &remove_lock_files
           find . -name "*.lock" -print
           find . -name "*.lock" -delete
           find . -name "gc.properties" -delete
+
+          cd ~/.gradle/caches/jars-9
+          pwd
+          find . -name "*.lock" -print
+          find . -name "*.lock" -delete
+          find . -name "gc.properties" -delete
+
 
 jobs:
   say-hello:
