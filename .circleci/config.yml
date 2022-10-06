@@ -4,15 +4,14 @@ parameters:
     type: string
     default: "0.1"
 
-
 save_cache_wrapper: &save_cache_wrapper
   save_cache:
-    key: gradle-wrapper-<< pipeline.parameters.cache-version >>--{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+    key: << pipeline.parameters.cache-version >>-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
     paths:
        - ~/.gradle/wrapper/
 restore_cache_wrapper: &restore_cache_wrapper
   restore_cache:
-    key: gradle-wrapper-<< pipeline.parameters.cache-version >>--{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
+    key: << pipeline.parameters.cache-version >>-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
 
 jobs:
   say-hello:
@@ -26,9 +25,21 @@ jobs:
           command: ./gradlew :help
       - <<: *save_cache_wrapper
 
+  second-step:
+    docker:
+      - image: cimg/android:2022.09
+    steps:
+      - checkout
+      - <<: *restore_cache_wrapper
+      - run:
+          name: "Help"
+          command: ./gradlew :help
+      - <<: *save_cache_wrapper
 
 workflows:
   say-hello-workflow:
     jobs:
       - say-hello
-
+      - second-step:
+          requires:
+            - say-hello
