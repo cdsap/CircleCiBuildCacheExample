@@ -1,8 +1,8 @@
 version: 2.1
 parameters:
-    cache-version:
-        type: string
-        default: "0.1"=
+  cache-version:
+    type: string
+    default: "0.1"
 
 
 save_cache_wrapper: &save_cache_wrapper
