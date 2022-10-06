@@ -30,16 +30,17 @@ plugins {
 }
 
 gradleEnterprise {
-    server = System.getenv("GE_URL")
+    server = "http://ge.solutions-team.gradle.com"
     allowUntrustedServer = true
     buildScan {
         publishAlways()
         capture {
-            taskInputFiles = true
+            isTaskInputFiles = true
         }
-        uploadInBackground = System.getenv("CI") == null // adjust to your CI provider
+        isUploadInBackground = System.getenv("CI") == null
     }
 }
+
 
 
 dependencyResolutionManagement {
