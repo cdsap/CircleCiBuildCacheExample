@@ -28,7 +28,8 @@ remove_lock_files: &remove_lock_files
       name: "Remove lock Files"
       command: |
           cd ~/.gradle/caches/modules-2
-          find . -name "*.lock"
+          pwd
+          find . -name "*.lock" -print
           find . -name "*.lock" -delete
           find . -name "gc.properties" -delete
 
