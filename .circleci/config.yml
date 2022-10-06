@@ -45,7 +45,7 @@ jobs:
       - <<: *restore_cache_assemble
       - run:
           name: "Help"
-          command: ./gradlew :assembleDebug
+          command: ./gradlew :app:assembleDebug
       - <<: *save_cache_wrapper
       - <<: *save_cache_assemble
 
