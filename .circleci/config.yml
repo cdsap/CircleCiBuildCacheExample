@@ -28,6 +28,7 @@ remove_lock_files: &remove_lock_files
       name: "Remove lock Files"
       command: |
           cd ~/.gradle/caches/modules-2
+          find . -name "*.lock"
           find . -name "*.lock" -delete
           find . -name "gc.properties" -delete
 
@@ -52,7 +53,7 @@ jobs:
       - <<: *restore_cache_assemble
       - run:
           name: "Help"
-          command: ./gradlew :app:assembleDebug
+          command: ./gradlew :app:assembleDebug --info
       - <<: *save_cache_wrapper
       - <<: *remove_lock_files
       - <<: *save_cache_assemble
