@@ -1,6 +1,6 @@
 ![Now in Android](docs/images/nia-splash.jpg "Now in Android")
 
-Now in Android App [Work in progress 🚧]
+TestNow in Android App [Work in progress 🚧]
 ==================
 
 **Learn how this app was designed by reading the [architecture](docs/ArchitectureLearningJourney.md) and [modularization](docs/ModularizationLearningJourney.md) learning journeys.**
