@@ -2,7 +2,7 @@ version: 2.1
 parameters:
   cache-version:
     type: string
-    default: "0.8"
+    default: "0.9"
 
 save_cache_wrapper: &save_cache_wrapper
   save_cache:
@@ -19,7 +19,6 @@ save_cache_assemble: &save_cache_assemble
         key: << pipeline.parameters.cache-version >>-assemble-{{ checksum "settings.gradle.kts" }}
         paths:
             - ~/.gradle/caches/modules-2/
-            - ~/.gradle/caches/jars-9/
 
 restore_cache_assemble: &restore_cache_assemble
     restore_cache:
