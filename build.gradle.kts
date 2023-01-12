@@ -20,7 +20,6 @@ buildscript {
         mavenCentral()
 
         // Android Build Server
-        maven { url = uri("../nowinandroid-prebuilts/m2repository") }
     }
 
 }
